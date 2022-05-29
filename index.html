@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="style.css"/>
+        <script src="main.js"></script>
+        <link rel="icon" href="Images/Icones/Profil_Picture_V2.png"/>
+        <title>Sophie Collin</title>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+        <script src="https://kit.fontawesome.com/f4651c1df1.js" crossorigin="anonymous"></script>
+        <script src="script.js"></script>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+
+    </head>
+
+    <body id="top">
+      
+      <!--Load Navbar from file.-->
+      <div id="nav-placeholder"></div>
+      <script>
+        $(function(){
+          $("#nav-placeholder").load("../nav.html");
+        });
+      </script>
+
+
+      <div class="front--page">
+      <!--
+        
+        <nav class="navbar" id="navbar">
+          <div class="navbar__container">
+
+            <div class="navbar__item">
+              <a href="/" class="navbar__link">My Works</a>
+            </div>
+
+            <div class="navbar__item">
+              <a href="/" class="navbar__link">About me</a>
+            </div>
+
+            <div class="navbar__item">
+              <a href="/" class="navbar__link">Contact</a>
+            </div>
+            
+          </div>
+        </nav>
+      -->
+
+      
+
+        
+        <!--Titre en gros + sous-titre-->
+        <div class="top--title">
+            <h1>
+                Sophie Collin
+            </h1>
+            
+            <h2>
+                Illustratrice
+            </h2>
+        </div>
+
+        
+        <div class="discover--container"> 
+          <a href="#Discover_Me_1">
+            <p>Me découvrir</p>
+            <img src="Images/Icones/Discover_Arrow_V4.png" alt="Discover Me!" title="Discover Me!" height="30px">
+          </a>
+
+        </div>
+
+      </div>
+      
+
+      <!--Présentation rapide de Sophie Collin-->
+
+      <div class="presentation" id="Discover_Me_1">
+
+
+        <h2 class="separation--line"><span>Présentation</span></h2>
+
+        <div class="presentation--container">
+
+          <div class="presentation--picture">
+            <img src="Images/Presentation_Picture_V1.jpg" title="Sophie Collin in 2022"  alt="Photo of Sophie Collin in 2022" class="selector">
+          </div>
+
+          <div class="presentation--text">
+            <p>
+              Sophie Collin, 498 ans, est illustratrice. <br>
+              Elle a débuté l'illustration avec de nombreux livres pour enfants, 
+              puis s'est tournée vers l'illustration numérique.<br>
+              C'est en 2022 qu'elle se prend de passion pour la broderie, un travail de précision et de finesse.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="discover--container"> 
+          <a href="#Discover_Me_2">
+            <img src="Images/Icones/Discover_Arrow_V4.png" alt="Discover Me!" title="Discover Me!" height="30px">
+          </a>
+
+        </div>
+
+      </div>
+
+
+
+      <!--Catégories de travaux avec les différents liens-->
+      <div class="work--presentation" id="Discover_Me_2">
+
+        <!--Separation line-->
+        <h2 class="separation--line"><span>Œuvres</span></h2>
+
+
+        <!--3 types de travaux de Sophie Collin-->
+        <div class="work--categories">
+          <div class="item--categories--work box">
+              <a href="/work/Illustrations" class="links--work">
+
+                <img src="Images/Icones/Dessins_PNG.png" alt="" height="100px">
+
+                Illustrations
+
+              </a>
+          </div>
+
+          <div class="item--categories--work">
+              <a href="work/livres" class="links--work">
+
+                <img src="Images/Icones/Livres_PNG.png" alt="" height="100px">
+                Livres
+              
+              </a>
+          </div>
+
+          <div class="item--categories--work">
+            <a href="/work/broderies/" class="links--work">
+
+              <img src="Images/Icones/Broderie_PNG.png" alt="" height="100px">
+              Broderies
+            
+            </a>
+          </div>
+
+          <div class="discover--container"> 
+            <a href="#Discover_Me_3">
+              <img src="Images/Icones/Discover_Arrow_V4.png" alt="Discover Me!" title="Discover Me!" height="30px">
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+      
+
+      <div class="numbers--presentation" id="Discover_Me_3">
+
+        <div class="adjustement--div"></div>
+        <!--Separation line-->
+        <h2 class="separation--line"><span>Quelques chiffres</span></h2>
+
+
+        <div class="chiffres--container">
+
+          <div class="chiffres--item">
+            <p class="chiffres--label">Livres publiés</p>
+            <p class="chiffres--chiffres" data-val="10">00</p>
+          </div>
+
+          <div class="chiffres--item">
+            <p class="chiffres--label">Abonnés</p>
+            <p class="chiffres--chiffres" id="chiffre--abonnes" data-val="3785">999+</p>
+          </div>
+
+          <div class="chiffres--item">
+            <p class="chiffres--label">Années d'expérience</p>
+            <p class="chiffres--chiffres" id="annees--experience" data-val="21">00</p>
+          </div>
+
+
+        </div>
+
+
+
+      </div>
+
+
+
+      <div class="contact--container" id="contact">
+        
+        <div class="adjustement--div"></div>
+
+        <h2 class="separation--line"><span>Contact</span></h2>
+
+
+        <form action="https://formsubmit.co/8b43028ae307e57c2d89996adfbd7e6b" method="POST" class="contact--elements">
+          <input type="text" name="name" required placeholder="Name" id="contact--name">
+          <input type="email" name="email" required placeholder="Email" id="contact--email">
+          <!--<input type="text" name="messsage" required id="contact--message">-->
+          
+          <textarea type="text" name="message" id="contact--message" placeholder="Message"></textarea>
+          
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="http://127.0.0.1:5500/thankyou">
+          
+          <button type="submit" id="contact--send" class="btn-grad"><i class="fa-solid fa-paper-plane"></i>Send</button>
+        </form>
+
+        
+
+      </div>
+
+
+
+      <!--<div class="block">hello</div>-->
+
+
+      <!--Load Footer from file.-->
+      <div id="footer--container"></div>
+      <script>
+        $(function(){
+          $("#footer--container").load("../footer.html");
+        });
+      </script>
+
+    </body>
+</html>

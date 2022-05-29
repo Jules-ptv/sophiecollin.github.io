@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="../../style.css">
+    <!--<script src="../../main.js"></script>-->
+    <link rel="icon" href="../../Images/Icones/Profil_Picture_V2.png"/>
+    <title>Livres - Sophie Collin</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/f4651c1df1.js" crossorigin="anonymous"></script>
+    <script src="/script.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+    <script type="text/javascript" src="../../Images/data.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+
+</head>
+<body>
+	
+	<!--Load Navbar from file.-->
+  <div id="nav-placeholder"></div>
+  <script>
+    $(function(){
+      $("#nav-placeholder").load("../../nav.html");
+    });
+  </script>
+
+	<div class="empty--div"></div>
+
+
+	<div class="heading--container">
+	  <h2 class="heading--title">Broderies</h2>
+	</div>
+	  
+
+  <!--Gallery-->
+
+  <!--Filter Categories-->
+
+  <h2 id="categories--indicator"><span>Tous ([nb])</span><i class="fa-solid fa-filter" onclick="
+    if(document.getElementById('categories-container').style.display=='flex') {document.getElementById('categories-container').style.display='none'} else {document.getElementById('categories-container').style.display='flex'}" title="Filtrer par catégorie"></i></h2>
+
+  <script>
+    document.getElementById('categories--indicator').firstChild.innerHTML ="Tous (" + 10 +")" //Indicate to user the chosen category.
+  </script>
+
+  
+
+  <div class="filter--container" id="categories-container" style="display: none;">
+
+		<div class="categories--container">
+			<div class="categories--item" onclick='
+        document.getElementById("categories--indicator").firstChild.innerHTML ="Catégorie : "+this.innerHTML;
+        loadImages("paysages")'>
+
+				Paysages
+			</div>
+			<div class="categories--item" onclick='document.getElementById("categories--indicator").firstChild.innerHTML ="Catégorie : "+this.innerHTML;loadImages("culture")'>
+				Culture locale
+			</div>
+			<div class="categories--item" onclick='document.getElementById("categories--indicator").firstChild.innerHTML ="Catégorie : "+this.innerHTML;loadImages("fouesnant")'>
+				Fouesnant et ses alentours
+			</div>
+		</div>
+		<i class="fa-solid fa-filter-circle-xmark" onclick='document.getElementById("categories--indicator").firstChild.innerHTML ="Tous (" + 10 + ")" ;loadImages(""); document.getElementById("categories-container").style.display = "none"'></i>
+	</div>
+
+
+
+
+
+
+	
+
+	<div class="full--img" id="fullImgBox" style="display: none;">
+
+		<p class="title--livres--viewer" id="title-livres">Hello World.</p>
+	
+		<i class="fa-solid fa-xmark" onclick="closeFullImg()" id="close--fullImg"></i>
+		
+
+		<i class="fa-solid fa-angle-left" id="left--arrow" onclick="openFullCar(document.getElementById('fullImg').getAttribute('src'),parseInt(document.getElementById('fullImg').getAttribute('index'))-1,parseInt(document.getElementById('fullImg').getAttribute('lencarousel')))"></i>
+
+		<img src="" id="fullImg" index="1">
+		<video src="" id="fullVid" controls autoplay loop></video>
+		
+		<i class="fa-solid fa-angle-right" id="right--arrow" onclick="openFullCar(document.getElementById('fullImg').getAttribute('src'),parseInt(document.getElementById('fullImg').getAttribute('index'))+1,parseInt(document.getElementById('fullImg').getAttribute('lencarousel')))"></i>
+
+
+		<button class="button-64" role="button" id="buy-livres" onclick="openUrl(document.getElementById('fullImg').getAttribute('position'))"><span class="text">Acheter</span></button>
+
+	</div>
+
+	
+
+	<div class="img--gallery" id="illustrations-container">
+	</div>
+	
+	<script>
+		var mydata = JSON.parse(data_broderies);
+		var data_carousel_length = JSON.parse(data_2)
+		window.onload = () => {
+      fullImgBox.style.display = "none";
+			loadImages("");
+		}
+		
+		function loadImages(filter) {
+			document.getElementById('illustrations-container').innerHTML ='';
+			
+			for(let i=10; i>0; i--)
+			{
+				
+				if ((mydata[i-1].categories).includes(filter) || filter==="")
+				{
+
+					if (mydata[i-1].nature == "image") 
+				{
+					newDir = "../../Images/Broderies/"+i+".jpg"
+					let tag = document.createElement("img");
+					tag.setAttribute('src',newDir)
+					tag.setAttribute('position',i-1)
+					tag.setAttribute('onclick',"openFullImg(this.getAttribute('src'),this.getAttribute('position'))")
+					var element = document.getElementById("illustrations-container");
+					element.appendChild(tag);
+					
+
+				} else if (mydata[i-1].nature == "carousel")
+				{
+					newDir = "../../Images/Livres/"+i+"/1.jpg"
+					let tag = document.createElement("img");
+					tag.setAttribute('src',newDir)
+					tag.setAttribute('lencarousel', data_carousel_length[i-1].length)
+					tag.setAttribute('onclick',"openFullCar(this.getAttribute('src'),1,this.getAttribute('lencarousel'))")
+					var element = document.getElementById("illustrations-container");
+					element.appendChild(tag);
+
+
+
+
+				} else if (mydata[i-1].nature == "video")
+				{
+					newDir = "../../Images/Livres/"+i+".mp4"
+					let tag = document.createElement("video");
+					tag.setAttribute('src',newDir)
+					tag.setAttribute('muted','True')
+					tag.setAttribute('onclick',"openFullVid(this.getAttribute('src'))")
+					tag.setAttribute('autoplay','')
+					tag.setAttribute('loop','')
+					
+					
+					var element = document.getElementById("illustrations-container");
+					element.appendChild(tag);
+					
+				}
+				}
+				
+			
+			}
+		}
+
+
+
+		let fullImgBox = document.getElementById('fullImgBox');
+		let fullImg = document.getElementById('fullImg');
+		let fullVid = document.getElementById('fullVid');
+		let Larrow = document.getElementById('left--arrow');
+		let Rarrow = document.getElementById('right--arrow');
+
+		function openFullImg(pic,position) {
+			fullImgBox.style.display = "flex";
+			fullVid.style.display = "none";
+			fullImg.style.display = "block";
+			fullImg.setAttribute('src', pic);
+
+			Larrow.style.opacity = 0;
+			Rarrow.style.opacity = 0;
+
+			document.getElementById('title-livres').innerHTML = mydata[parseInt(position)].name
+			document.getElementById('fullImg').setAttribute('position',position)
+			$('body').addClass('stop-scrolling') //To stop scrolling
+		}
+
+		function openFullVid(pic) {
+			fullImgBox.style.display = "flex";
+			fullImg.style.display = "none";
+			fullVid.style.display = "block";
+			fullVid.setAttribute('src', pic);
+			$('body').addClass('stop-scrolling') //To stop scrolling
+
+
+			Larrow.style.opacity = 0;
+			Rarrow.style.opacity = 0;
+		}
+
+		function openFullCar(pic, index, i) {
+			lenCarousel = i;
+
+			fullImgBox.style.display = "flex";
+			fullImg.style.display = "block";
+			fullVid.style.display = "none";
+			fullImg.setAttribute('src', pic.slice(0,-5)+index+".jpg");
+			
+			$('body').addClass('stop-scrolling') //To stop scrolling
+
+			document.getElementById('fullImg').setAttribute('index', index.toString())
+			document.getElementById('fullImg').setAttribute('lencarousel', parseInt(i))
+			
+			
+
+			if(parseInt(index)>1){
+				Larrow.style.opacity = 1;
+				Larrow.style.pointerEvents = 'all';
+
+			} else {
+				Larrow.style.opacity = 0;
+				Larrow.style.pointerEvents = 'none';
+			}
+
+			if(parseInt(index)<parseInt(lenCarousel)){
+				Rarrow.style.opacity = 1;
+				Rarrow.style.pointerEvents = 'all';
+			} else {
+				Rarrow.style.opacity = 0;
+				Rarrow.style.pointerEvents = 'none';
+			}
+	
+		}
+
+
+		function closeFullImg(){
+			fullImgBox.style.display = "none";
+			$('body').removeClass('stop-scrolling') //To be able to scroll again !
+			document.getElementById('fullImg').setAttribute('index','1');
+		}
+
+		function openUrl(position) {
+			url = mydata[parseInt(position)].link
+
+			window.open(url, '_blank').focus();
+		}
+
+
+
+    //If user presses a key, then do something :
+    document.onkeydown = checkKey;
+
+    function checkKey(e) {
+      if (document.getElementById('fullImgBox').style.display != 'none') 
+      {
+        e = e || window.event;
+
+        if (e.keyCode == '37') {
+          if (document.getElementById('left--arrow').style.opacity != "0") 
+          {
+            document.getElementById('left--arrow').click();
+          }
+          
+        }
+        else if (e.keyCode == '39') {
+          if(document.getElementById('right--arrow').style.opacity != "0")
+          {
+            document.getElementById('right--arrow').click();
+          }
+          
+        }
+      }
+      
+
+}
+
+
+	</script>
+
+    
+	
+
+	<!--Load Footer from file.-->
+	<div id="footer--container"></div>
+	<script>
+	$(function(){
+		$("#footer--container").load("/footer.html");
+	});
+	</script>
+
+
+</body>
+</html>
